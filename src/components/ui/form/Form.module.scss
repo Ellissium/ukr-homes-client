@@ -1,0 +1,15 @@
+@import '@/styles/variables.scss';
+.form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	height: 100%;
+	padding: 50px;
+	background: $white;
+	text-align: center;
+
+	&__content {
+		width: 100%;
+	}
+}
