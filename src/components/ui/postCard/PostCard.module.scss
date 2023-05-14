@@ -1,0 +1,170 @@
+@import '@/styles/variables.scss';
+.postCard {
+	position: relative;
+	display: flex;
+	align-items: center;
+	width: 1000px;
+	height: 250px;
+	margin: 20px;
+	padding: 10px;
+	background: $white;
+	border-radius: 25px;
+	text-decoration: none;
+	color: $black;
+	overflow: hidden;
+
+	&:hover {
+		box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+	}
+
+	&__text {
+		margin: 5px;
+		font-size: 16px;
+		font-weight: bold;
+	}
+
+	&__textHeaders {
+		margin: 5px;
+		font-size: 20px;
+		color: $dark-gray;
+	}
+
+	&__container {
+		display: flex;
+		align-items: center;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+	}
+
+	&__gallery {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 30%;
+		height: 226px;
+		border: 2px solid $primary;
+		border-radius: 9px;
+		overflow: hidden;
+
+		&Image {
+			object-fit: fill;
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	&__information {
+		display: flex;
+		width: 70%;
+		height: 100%;
+
+		.postCard__description {
+			position: relative;
+			width: 60%;
+			padding: 10px;
+
+			&::after {
+				content: '';
+				position: absolute;
+				top: 20%;
+				left: 100%;
+				height: 60%;
+				width: 1px;
+				background-color: $primary;
+				transform: translateX(-50%);
+			}
+		}
+
+		.postCard__priceList {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			width: 20%;
+			padding: 10px;
+
+			&::after {
+				content: '';
+				position: absolute;
+				top: 20%;
+				left: 100%;
+				width: 1px;
+				height: 60%;
+				background-color: $primary;
+				transform: translateX(-50%);
+			}
+		}
+
+		.postCard__total {
+			width: 20%;
+
+			.postCard__favorite {
+				display: flex;
+				align-items: center;
+				justify-content: right;
+				width: 100%;
+				height: 20%;
+				padding: 0 25px;
+
+				&Icon {
+					z-index: 11;
+					width: 25px;
+					height: 25px;
+					stroke: $black;
+					stroke-width: 1px;
+					stroke-linecap: round;
+					fill: transparent;
+					cursor: pointer;
+					transition: all 0.1s ease;
+
+					&:hover {
+						width: 30px;
+						height: 30px;
+						fill: $red;
+						filter: drop-shadow(0px 0px 5px rgba($black, 0.7));
+					}
+
+					&:active {
+						width: 25px;
+						height: 25px;
+					}
+				}
+			}
+
+			&Price {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				height: 80%;
+			}
+		}
+	}
+
+	&__overlay {
+		z-index: 10;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100px;
+		height: 100px;
+		background: $black;
+		border-radius: 50%;
+		outline: 20px solid transparent;
+		opacity: 0;
+		transform-origin: center;
+
+		&_animation {
+			opacity: 0.4;
+			animation: ripple 2s ease;
+		}
+	}
+}
+
+@keyframes ripple {
+	to {
+		transform: scale(100);
+	}
+}
