@@ -1,0 +1,74 @@
+@import '@/styles/variables.scss';
+.dropdown {
+	z-index: 1000;
+	position: relative;
+	width: 200px;
+
+	&__toggle {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 8px;
+		border: 2px solid $dark;
+		border-radius: 5px;
+		cursor: pointer;
+		user-select: none;
+
+		.dropdown__arrow {
+			width: 0;
+			height: 0;
+			margin-left: 8px;
+			border-style: solid;
+			border-width: 5px 4px 0 4px;
+			border-color: $dark transparent transparent transparent;
+
+			&_up {
+				border-width: 5px 4px 0 4px;
+				border-color: $dark transparent transparent transparent;
+			}
+
+			&_down {
+				border-width: 0 4px 5px 4px;
+				border-color: transparent transparent $dark transparent;
+			}
+		}
+	}
+
+	&__menu {
+		z-index: 1;
+		position: absolute;
+		left: 0;
+		max-height: 100px;
+		width: 200px;
+		margin: 0;
+		padding: 0;
+		background: $white;
+		border: 1px solid $light;
+		border-radius: 5px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+		overflow-y: scroll;
+
+		ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+
+			li {
+				padding: 8px;
+				cursor: pointer;
+				user-select: none;
+
+				&:hover {
+					background-color: $light;
+					/* box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+						0 10px 10px rgba(0, 0, 0, 0.22);
+					scale: 1.01; */
+				}
+
+				&:active {
+					background-color: $dark;
+				}
+			}
+		}
+	}
+}
