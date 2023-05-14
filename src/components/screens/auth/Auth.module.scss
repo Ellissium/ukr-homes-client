@@ -1,0 +1,135 @@
+@import '@/styles/variables.scss';
+
+.auth {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	font-family: 'Montserrat', sans-serif;
+
+	.h1 {
+		margin: 0;
+		font-weight: bold;
+	}
+
+	.p {
+		margin: 20px 0 30px;
+		font-size: 14px;
+		font-weight: 100;
+		line-height: 20px;
+		letter-spacing: 0.5px;
+	}
+
+	&__container {
+		position: relative;
+		max-width: 100%;
+		min-height: 480px;
+		width: 768px;
+		border-radius: 10px;
+		box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+		overflow: hidden;
+
+		&.right__panel__active {
+			.auth__signin {
+				transform: translateX(100%);
+			}
+
+			.auth__overlay {
+				transform: translateX(-100%);
+
+				&Container {
+					transform: translateX(50%);
+
+					.auth__overlayPanel {
+						&.auth__overlayPanel_left {
+							transform: translateX(0);
+						}
+
+						&.auth__overlayPanel_right {
+							transform: translateX(20%);
+						}
+					}
+				}
+			}
+		}
+
+		.auth__form {
+			position: absolute;
+			top: 0;
+			height: 100%;
+			transition: all 0.6s ease-in-out;
+		}
+
+		.auth__signin {
+			z-index: 2;
+			left: 0;
+			width: 50%;
+		}
+
+		.auth__overlay {
+			z-index: 100;
+			position: absolute;
+			top: 0;
+			left: 50%;
+			width: 50%;
+			height: 100%;
+			transition: transform 0.6s ease-in-out;
+			overflow: hidden;
+
+			&Container {
+				position: relative;
+				left: -100%;
+				width: 200%;
+				height: 100%;
+				background: $primary;
+				background: -webkit-linear-gradient(
+					to right,
+					$secondary-dark,
+					$secondary-light
+				);
+				background: linear-gradient(
+					to right,
+					$secondary-dark,
+					$secondary-light
+				);
+				color: $white;
+				transform: translateX(0);
+				transition: transform 0.6s ease-in-out;
+
+				.auth__overlayPanel {
+					position: absolute;
+					top: 0;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					justify-content: center;
+					width: 50%;
+					height: 100%;
+					padding: 0 40px;
+					text-align: center;
+					transform: translateX(0);
+					transition: transform 0.6s ease-in-out;
+
+					&.auth__overlayPanel_left {
+						transform: translateX(-20%);
+					}
+
+					&.auth__overlayPanel_right {
+						right: 0;
+						transform: translateX(0);
+					}
+				}
+			}
+		}
+	}
+
+	.auth__back {
+		display: flex;
+		width: 768px;
+
+		.auth__backLink {
+			margin: 10px;
+		}
+	}
+}
