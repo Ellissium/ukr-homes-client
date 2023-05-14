@@ -1,0 +1,18 @@
+@import '@/styles/variables.scss';
+.filterCrumb__container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 200px;
+	height: 50px;
+	margin: 10px;
+	background: $secondary-dark;
+	border: 2px solid $white-smoke;
+	border-radius: 25px;
+	color: $white;
+
+	&:hover {
+		cursor: pointer;
+		background: $secondary-light;
+	}
+}
