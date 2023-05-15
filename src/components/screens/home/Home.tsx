@@ -1,18 +1,17 @@
 import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import { FC } from 'react'
-import ReactPaginate from 'react-paginate'
-import { useDispatch } from 'react-redux'
 
 import Dropdown from '@/ui/dropdown/Dropdown'
 import Footer from '@/ui/footer/Footer'
 import Loader from '@/ui/loader/Loader'
 import Meta from '@/ui/meta/Meta'
 import Navbar from '@/ui/navbar/Navbar'
-import PostCard from '@/ui/postCard/PostCard'
+import Paginate from '@/ui/paginate/Paginate'
 import PostFilter from '@/ui/postFilter/PostFilter'
+import PostList from '@/ui/postList/PostList'
 
-import { setPage } from '@/store/page/pageFilters.slice'
+import { PageFilters } from '@/store/page/pageFilters.interface'
 import { TypeRootState } from '@/store/store'
 
 import { useTypedSelector } from '@/hooks/useTypedSelector'
@@ -24,19 +23,18 @@ import main from '@/../public/images/main.jpg'
 import { PostService } from '@/services/post/post.service'
 
 const Home: FC = () => {
-	const dispatch = useDispatch()
-	const pageFilters = useTypedSelector(
-		(state: TypeRootState) => state.pageFilters
-	)
+	const { page, perPage, sort, query, category } =
+		useTypedSelector<PageFilters>((state: TypeRootState) => state.pageFilters)
 	const { data, isLoading } = useQuery<TypePaginationPosts>(
-		['posts', pageFilters],
+		['posts', page, perPage, sort, query, category],
 		() =>
 			PostService.getAll({
-				page: pageFilters.page,
-				perPage: 3,
-				category: pageFilters.category,
-				sort: pageFilters.sort,
-				searchTerm: pageFilters.query
+				user: undefined,
+				page: page,
+				perPage: perPage,
+				category: category,
+				sort: sort,
+				searchTerm: query
 			}),
 		{
 			keepPreviousData: true,
@@ -44,9 +42,6 @@ const Home: FC = () => {
 			cacheTime: 600000
 		}
 	)
-	const handlePageChange = (selectedPage: { selected: number }) => {
-		dispatch(setPage(selectedPage.selected + 1))
-	}
 	return (
 		<Meta title='Home'>
 			<div className={styles.home}>
@@ -57,7 +52,7 @@ const Home: FC = () => {
 						src={main}
 						alt='My Image'
 						className={styles.home__mainImage}
-					></Image>
+					/>
 					<PostFilter />
 				</div>
 				{isLoading ? (
@@ -67,31 +62,11 @@ const Home: FC = () => {
 						<div>
 							<Dropdown />
 						</div>
-						<div className={styles.home__postList}>
-							{data?.posts.map(post => (
-								<PostCard key={post.id} post={post}></PostCard>
-							))}
-						</div>
-						{data?.length ? (
-							<ReactPaginate
-								pageCount={data?.length ? data.length / 3 : 1}
-								pageRangeDisplayed={3}
-								marginPagesDisplayed={1}
-								forcePage={pageFilters.page - 1}
-								onPageChange={handlePageChange}
-								previousLabel={<div className={styles.square}>{'<'}</div>}
-								nextLabel={<div className={styles.square}>{'>'}</div>}
-								breakLabel={<div className={styles.square}>{'...'}</div>}
-								containerClassName={styles.home__paginateContainer}
-								pageClassName={styles.home__paginatePage}
-								pageLinkClassName={styles.home__paginatePageLink}
-								activeClassName={styles.home__paginateActive}
-								previousClassName={styles.home__paginatePrevious}
-								nextClassName={styles.home__paginateNext}
-							/>
-						) : (
-							<div />
-						)}
+						<PostList
+							length={data?.length ? data.length : 0}
+							posts={data?.posts ? data.posts : []}
+						></PostList>
+						{data?.length ? <Paginate data={data} userPage={false} /> : <div />}
 					</div>
 				)}
 				<Footer />
