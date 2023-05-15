@@ -1,0 +1,71 @@
+@import '@/styles/variables.scss';
+
+.home__paginateContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	list-style: none;
+	padding: 5px 0;
+	margin-bottom: 40px;
+	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+	background: linear-gradient(to right, $secondary-dark, $secondary-light);
+}
+
+.home__paginatePage {
+	margin: 5px;
+	background-color: transparent;
+	border-radius: 5px;
+	transition: all 0.3s ease-in-out;
+}
+
+.home__paginatePageLink,
+.home__paginatePrevious,
+.home__paginateNext {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 40px;
+	height: 40px;
+
+	color: $white;
+	border-radius: 5px;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.home__paginatePageLink:hover,
+.home__paginatePrevious:hover,
+.home__paginateNext:hover,
+.square:hover {
+	background-color: $secondary-light;
+}
+.home__paginatePageLink:active,
+.home__paginatePrevious:active,
+.home__paginateNext:active,
+.square:active {
+	background-color: $secondary-dark;
+}
+.home__paginateActive {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: $secondary-dark;
+	color: $white;
+	border-radius: 5px;
+	font-size: 16px;
+	box-shadow: 0 7px 14px rgba(0, 0, 0, 0.35), 0 5px 5px rgba(0, 0, 0, 0.35);
+}
+
+.square {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 40px;
+	height: 40px;
+	margin: 10px;
+	background-color: transparent;
+	color: $white;
+	border-radius: 5px;
+	font-size: 16px;
+	cursor: pointer;
+}
