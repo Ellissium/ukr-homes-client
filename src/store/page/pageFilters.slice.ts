@@ -5,6 +5,8 @@ import { EnumPostCategory, EnumPostSort } from '@/services/post/post.types'
 
 const initialState: PageFilters = {
 	page: 1,
+	userPage: 1,
+	perPage: 3,
 	sort: EnumPostSort.OLDEST,
 	query: '',
 	category: undefined
@@ -18,6 +20,18 @@ export const pageFiltersSlice = createSlice({
 			return {
 				...state,
 				page: action.payload
+			}
+		},
+		setUserPage: (state, action: PayloadAction<number>) => {
+			return {
+				...state,
+				userPage: action.payload
+			}
+		},
+		setPerPage: (state, action: PayloadAction<number>) => {
+			return {
+				...state,
+				perPage: action.payload
 			}
 		},
 		setQuery: (state, action: PayloadAction<string>) => {
@@ -44,7 +58,13 @@ export const pageFiltersSlice = createSlice({
 	}
 })
 
-export const { setPage, setQuery, setSort, setCategory } =
-	pageFiltersSlice.actions
+export const {
+	setPage,
+	setUserPage,
+	setPerPage,
+	setQuery,
+	setSort,
+	setCategory
+} = pageFiltersSlice.actions
 
 export default pageFiltersSlice.reducer
