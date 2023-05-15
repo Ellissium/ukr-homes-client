@@ -4,6 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { IEmailPassword, IUserEmailPassword } from '@/store/user/user.interface'
 
 import { useActions } from '@/hooks/useActions'
+import { useAuthRedirect } from '@/hooks/useAuthRedirect'
 
 import Button from '../button/Button'
 import Heading from '../heading/Heading'
@@ -14,7 +15,7 @@ import { FormType, IFormProps } from './form.interface'
 import { validEmail } from '@/screens/auth/valid-email'
 
 const Form: FC<IFormProps> = ({ type }) => {
-	// useAuthRedirect()
+	useAuthRedirect()
 	const { auth } = useActions()
 	const {
 		register: formRegister,
