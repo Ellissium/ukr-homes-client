@@ -4,7 +4,7 @@ import { ButtonHTMLAttributes, FC, PropsWithChildren } from 'react'
 import styles from './Button.module.scss'
 
 interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
-	variant?: '' | 'ghost' | 'search'
+	variant?: '' | 'ghost' | 'search' | 'logout'
 
 	active?: boolean
 }
