@@ -59,7 +59,13 @@
 		}
 
 		.navbar__list {
+			display: flex;
+			align-items: center;
+			justify-content: center;
 			&Link {
+				display: flex;
+				align-items: center;
+				justify-content: center;
 				text-decoration: none;
 				padding: 10px;
 				margin: 10px;
@@ -71,6 +77,28 @@
 
 				&:active {
 					color: $secondary-dark;
+				}
+
+				.navbar__profileText {
+					margin-right: 10px;
+				}
+
+				.navbar__profileImage {
+					border: 2px solid $primary;
+					border-radius: 50%;
+				}
+			}
+			.navbar__logout {
+				display: flex;
+				align-items: center;
+				&Icon {
+					width: 35px;
+					height: 35px;
+					stroke: $white;
+					stroke-width: 1px;
+					&:hover {
+						stroke: $primary;
+					}
 				}
 			}
 		}

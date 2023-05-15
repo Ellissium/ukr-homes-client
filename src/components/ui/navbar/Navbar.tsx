@@ -2,7 +2,10 @@ import cn from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC, useEffect, useState } from 'react'
+import { FiLogOut } from 'react-icons/fi'
 
+import { useActions } from '@/hooks/useActions'
+import { useProfile } from '@/hooks/useProfile'
 import useScroll from '@/hooks/useScroll'
 
 import styles from './Navbar.module.scss'
@@ -12,7 +15,9 @@ interface INavbarProps {
 	hideDistance?: number
 }
 const Navbar: FC<INavbarProps> = ({ hideDistance = 1 }) => {
+	const profile = useProfile()
 	const currentScrollPos = useScroll()
+	const { logout } = useActions()
 	const [prevScrollPos, setPrevScrollPos] = useState(0)
 	const [isVisible, setIsVisible] = useState(true)
 
@@ -23,6 +28,9 @@ const Navbar: FC<INavbarProps> = ({ hideDistance = 1 }) => {
 		setPrevScrollPos(currentScrollPos)
 	}, [currentScrollPos])
 
+	const handleClick = () => {
+		logout()
+	}
 	return (
 		<div
 			className={cn(
@@ -58,7 +66,25 @@ const Navbar: FC<INavbarProps> = ({ hideDistance = 1 }) => {
 						Оренда
 					</Link>
 					<Link className={styles.navbar__listLink} href='/auth'>
-						Authorization
+						Авторизуватися
+					</Link>
+					<Link className={styles.navbar__listLink} href='/profile'>
+						<div className={styles.navbar__profileText}>Мій профіль</div>
+						<Image
+							priority={false}
+							src={profile?.avatarPath ? profile.avatarPath : logo}
+							alt='My Image'
+							width={50}
+							height={50}
+							className={styles.navbar__profileImage}
+						/>
+					</Link>
+					<Link
+						className={styles.navbar__logout}
+						onClick={handleClick}
+						href='/'
+					>
+						<FiLogOut className={styles.navbar__logoutIcon} />
 					</Link>
 				</nav>
 			</div>
