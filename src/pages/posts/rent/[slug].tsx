@@ -9,10 +9,6 @@ type Params = {
 	slug?: string
 }
 
-type Props = {
-	post?: IPost
-}
-
 const PostPage: NextPage<IPostDetails> = ({ post }) => {
 	return <Post post={post} />
 }

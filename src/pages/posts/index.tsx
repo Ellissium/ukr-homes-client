@@ -4,11 +4,9 @@ import { useDispatch } from 'react-redux'
 
 import { setCategory, setPage } from '@/store/page/pageFilters.slice'
 
-import { TypePaginationPosts } from '@/types/post.interface'
-
 import Home from '@/screens/home/Home'
 
-const PostsPage: NextPage<TypePaginationPosts> = () => {
+const PostsPage: NextPage = () => {
 	const dispatch = useDispatch()
 	useEffect(() => {
 		dispatch(setPage(1))
