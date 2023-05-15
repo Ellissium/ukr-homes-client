@@ -2,13 +2,17 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 
 import { errorCatch } from '@/api/api_helper'
 
-import { IAuthResponse, IEmailPassword } from './user.interface'
+import {
+	IAuthResponse,
+	IEmailPassword,
+	IUserEmailPassword
+} from './user.interface'
 import { removeFromStorage } from '@/services/auth/auth.helper'
 import { AuthService } from '@/services/auth/auth.service'
 
 export const auth = createAsyncThunk<
 	IAuthResponse,
-	{ type: string; data: IEmailPassword }
+	{ type: string; data: IEmailPassword | IUserEmailPassword }
 >('auth', async ({ type, data }, thunkApi) => {
 	try {
 		const response = await AuthService.main(

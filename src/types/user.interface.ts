@@ -1,3 +1,5 @@
+import { IPost } from './post.interface'
+
 export interface IUser {
 	id: number
 	email: string
@@ -5,4 +7,5 @@ export interface IUser {
 	avatarPath: string
 	phone: string
 	role: string
+	posts: IPost[]
 }

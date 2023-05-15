@@ -1,7 +1,11 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
-import { IAuthResponse, IEmailPassword } from '@/store/user/user.interface'
+import {
+	IAuthResponse,
+	IEmailPassword,
+	IUserEmailPassword
+} from '@/store/user/user.interface'
 
 import { getContentType } from '@/api/api_helper'
 import { instance } from '@/api/api_interceptor'
@@ -9,12 +13,18 @@ import { instance } from '@/api/api_interceptor'
 import { saveToStorage } from './auth.helper'
 
 export const AuthService = {
-	async main(type: 'login' | 'register', data: IEmailPassword) {
+	async main(
+		type: 'login' | 'register',
+		data: IEmailPassword | IUserEmailPassword
+	) {
+		console.log('try')
 		const response = await instance<IAuthResponse>({
 			url: `/auth/${type}`,
 			method: 'POST',
 			data
 		})
+
+		console.log('try')
 		if (response.data.accessToken) saveToStorage(response.data)
 		return response.data
 	},

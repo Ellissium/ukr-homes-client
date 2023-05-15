@@ -23,6 +23,7 @@ export type TypePostData = {
 }
 
 export type TypePostDataFilters = {
+	user?: number
 	sort?: EnumPostSort
 	searchTerm?: string
 	page?: string | number
