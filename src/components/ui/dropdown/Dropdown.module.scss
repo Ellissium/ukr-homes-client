@@ -3,7 +3,11 @@
 	z-index: 1000;
 	position: relative;
 	width: 200px;
-
+	font-family: 'Roboto', sans-serif;
+	background: $white;
+	border-radius: 5px;
+	color: $dark-gray;
+	font-weight: 600;
 	&__toggle {
 		display: flex;
 		justify-content: space-between;
@@ -13,7 +17,7 @@
 		border-radius: 5px;
 		cursor: pointer;
 		user-select: none;
-
+		height: 50px;
 		.dropdown__arrow {
 			width: 0;
 			height: 0;
@@ -43,11 +47,10 @@
 		margin: 0;
 		padding: 0;
 		background: $white;
-		border: 1px solid $light;
+		border: 2px solid $dark;
 		border-radius: 5px;
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 		overflow-y: scroll;
-
 		ul {
 			list-style: none;
 			margin: 0;
@@ -58,17 +61,25 @@
 				cursor: pointer;
 				user-select: none;
 
+				transition: all 100ms ease-in;
 				&:hover {
 					background-color: $light;
-					/* box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
-						0 10px 10px rgba(0, 0, 0, 0.22);
-					scale: 1.01; */
+					box-shadow: 0 7px 14px rgba(0, 0, 0, 0.25),
+						0 5px 5px rgba(0, 0, 0, 0.22);
 				}
 
 				&:active {
-					background-color: $dark;
+					background-color: rgba($primary, 0.7);
+					box-shadow: none;
 				}
 			}
 		}
+	}
+}
+
+.regionDropdown {
+	width: 300px;
+	.dropdown__menu {
+		width: 300px;
 	}
 }
