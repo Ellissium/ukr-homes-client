@@ -24,11 +24,26 @@ export type TypePostData = {
 
 export type TypePostDataFilters = {
 	user?: number
-	sort?: EnumPostSort
+	sort?: string
 	searchTerm?: string
 	page?: string | number
 	perPage?: string | number
-	category?: string
+	category?: string | number
+	minPrice?: string | number
+	maxPrice?: string | number
+	minArea?: string | number
+	maxArea?: string | number
+	minFloor?: string | number
+	maxFloor?: string | number
+	minRooms?: string | number
+	maxRooms?: string | number
+	minRent?: string | number
+	maxRent?: string | number
+	minBeds?: string | number
+	maxBeds?: string | number
+	minBathRooms?: string | number
+	maxBathRooms?: string | number
+	region?: string
 }
 
 export enum EnumPostSort {

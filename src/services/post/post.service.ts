@@ -1,13 +1,13 @@
 import { IPost, TypePaginationPosts } from '@/types/post.interface'
 
-import { instance } from '@/api/api_interceptor'
+import { axiosClassic, instance } from '@/api/api_interceptor'
 
-import { POSTS, TypePostData, TypePostDataFilters } from './post.types'
+import { POSTS, TypePostDataFilters } from './post.types'
 
 export const PostService = {
 	async getAll(queryData = {} as TypePostDataFilters) {
 		console.log('postService')
-		const { data } = await instance<TypePaginationPosts>({
+		const { data } = await axiosClassic<TypePaginationPosts>({
 			url: POSTS,
 			method: 'GET',
 			params: queryData
@@ -16,46 +16,58 @@ export const PostService = {
 	},
 
 	async getSimilar(id: string | number) {
-		return instance<IPost[]>({
+		return axiosClassic<IPost[]>({
 			url: `${POSTS}/similar/${id}`,
 			method: 'GET'
 		})
 	},
 
 	async getBySlug(slug: string) {
-		return instance<IPost>({
+		return axiosClassic<IPost>({
 			url: `${POSTS}/by-slug/${slug}`,
 			method: 'GET'
 		})
 	},
 
-	async getByPost(postSlug: string) {
-		return instance<IPost[]>({
+	async getByPostSlug(postSlug: string) {
+		return axiosClassic<IPost[]>({
 			url: `${POSTS}/by-post/${postSlug}`,
 			method: 'GET'
 		})
 	},
 
 	async getById(id: string | number) {
-		return instance<IPost>({
+		const { data } = await instance<IPost>({
 			url: `${POSTS}/${id}`,
 			method: 'GET'
 		})
+		return data
 	},
 
-	async create() {
-		return instance<IPost>({
+	async create(post: any) {
+		//instance!!
+		const { data } = await instance<IPost>({
 			url: POSTS,
-			method: 'POST'
+			method: 'POST',
+			data: post,
+			headers: {
+				'Content-Type': 'multipart/form-data'
+			}
 		})
+
+		return data
 	},
 
-	async update(id: string | number, data: TypePostData) {
-		return instance<IPost>({
+	async update(id: string | number, post: any) {
+		const { data } = await instance<IPost>({
 			url: `${POSTS}/${id}`,
 			method: 'PUT',
-			data
+			data: post,
+			headers: {
+				'Content-Type': 'multipart/form-data'
+			}
 		})
+		return data
 	},
 
 	async delete(id: string | number) {
