@@ -1,0 +1,49 @@
+@import '@/styles/variables.scss';
+.regulations {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+	&__main {
+		height: 100px;
+	}
+
+	&__content {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		width: 60%;
+		margin: 20px;
+		padding: 20px 0;
+		border-radius: 20px;
+		text-align: center;
+		box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+
+		.regulations__heading {
+			margin: 20px;
+			color: $primary;
+		}
+		.regulations__text {
+			text-align: left;
+			margin: 40px;
+			width: 70%;
+			color: $dark-gray;
+			font-weight: 800;
+			font-size: 16px;
+			font-family: 'Monttserat', sans-serif;
+			line-height: 2;
+
+			&Header {
+				color: $primary;
+			}
+			&Field {
+				margin-top: 40px;
+			}
+		}
+		.info__image {
+			width: 70%;
+			height: 70%;
+		}
+	}
+}
