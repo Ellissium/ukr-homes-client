@@ -1,5 +1,8 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 
+import Layout from '@/ui/layout/Layout'
+import Meta from '@/ui/meta/Meta'
+
 import { IPost, IPostDetails } from '@/types/post.interface'
 
 import Post from '@/screens/post/Post'
@@ -14,7 +17,13 @@ type Props = {
 }
 
 const PostPage: NextPage<IPostDetails> = ({ post }) => {
-	return <Post post={post} />
+	return (
+		<Meta title={post.name}>
+			<Layout>
+				<Post post={post} />
+			</Layout>
+		</Meta>
+	)
 }
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
