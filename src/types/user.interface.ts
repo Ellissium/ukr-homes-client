@@ -8,4 +8,5 @@ export interface IUser {
 	phone: string
 	role: string
 	posts: IPost[]
+	favoritePosts: IPost[]
 }

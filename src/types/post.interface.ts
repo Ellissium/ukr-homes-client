@@ -1,4 +1,4 @@
-import { ICategory } from './category.interface'
+import { IAuthor, ICategory } from './category.interface'
 
 export interface IPost {
 	id: number
@@ -26,6 +26,7 @@ export interface IPost {
 	area: number
 	minRentalPeriod: number
 
+	author: IAuthor
 	category: ICategory
 }
 
@@ -38,6 +39,14 @@ export type TypePosts = {
 }
 
 export type TypePaginationPosts = {
+	onDeletePost?: (postId: number | string) => void
+	isProfileList?: boolean
 	length: number
 	posts: IPost[]
+}
+
+export interface IPostTemp {
+	name: string
+
+	images: string[]
 }

@@ -3,3 +3,11 @@ export interface ICategory {
 	name: string
 	slug: string
 }
+
+export interface IAuthor {
+	id: number
+	email: string
+	name: string
+	avatarPath: string
+	phone: string
+}
