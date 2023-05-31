@@ -6,12 +6,22 @@ import PostCard from '../postCard/PostCard'
 
 import styles from './PostList.module.scss'
 
-const PostList: FC<TypePaginationPosts> = data => {
+const PostList: FC<TypePaginationPosts> = ({
+	isProfileList = false,
+	posts,
+	onDeletePost,
+	length
+}) => {
 	return (
 		<div>
 			<div className={styles.home__postList}>
-				{data?.posts?.map(post => (
-					<PostCard key={post.id} post={post}></PostCard>
+				{posts?.map(post => (
+					<PostCard
+						isProfilePost={isProfileList}
+						key={post.id}
+						post={post}
+						handleDeletePost={onDeletePost}
+					></PostCard>
 				))}
 			</div>
 		</div>
