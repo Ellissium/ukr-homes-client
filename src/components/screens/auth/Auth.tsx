@@ -5,7 +5,6 @@ import { FC, useRef, useState } from 'react'
 import Button from '@/ui/button/Button'
 import Form from '@/ui/form/Form'
 import { FormType } from '@/ui/form/form.interface'
-import Meta from '@/ui/meta/Meta'
 
 import { useAuth } from '@/hooks/useAuth'
 
@@ -51,7 +50,7 @@ const Auth: FC = () => {
 	}
 
 	return (
-		<Meta title='Auth'>
+		<div>
 			{/* <div className={styles.wrapper}>{isLoading ? <Loader /> : <Form />}</div> */}
 			<div className={styles.auth}>
 				<div
@@ -109,7 +108,7 @@ const Auth: FC = () => {
 					</Link>
 				</div>
 			</div>
-		</Meta>
+		</div>
 	)
 }
 
