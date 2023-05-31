@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { IEmailPassword, IUserEmailPassword } from '@/store/user/user.interface'
@@ -17,6 +17,7 @@ import { validEmail } from '@/screens/auth/valid-email'
 const Form: FC<IFormProps> = ({ type }) => {
 	useAuthRedirect()
 	const { auth } = useActions()
+	const [errorMessage, setErrorMessage] = useState('')
 	const {
 		register: formRegister,
 		handleSubmit,
@@ -25,10 +26,26 @@ const Form: FC<IFormProps> = ({ type }) => {
 	} = useForm<FormType extends 'login' ? IEmailPassword : IUserEmailPassword>({
 		mode: 'onChange'
 	})
-	const onSubmit: SubmitHandler<IEmailPassword | IUserEmailPassword> = data => {
-		auth({ type, data })
-		reset()
+	const onSubmit: SubmitHandler<
+		IEmailPassword | IUserEmailPassword
+	> = async data => {
+		let res = await auth({ type, data })
+		if (typeof res === 'object') {
+			if (type === 'login') {
+				setErrorMessage('Невірні данні')
+			} else {
+				{
+					setErrorMessage('Користувач вже існує')
+				}
+			}
+
+			console.log(errorMessage)
+		}
+		// reset()
 	}
+	useEffect(() => {
+		setErrorMessage('')
+	}, [type])
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
 			<div className={styles.form__content}>
@@ -65,6 +82,7 @@ const Form: FC<IFormProps> = ({ type }) => {
 					placeholder='Password'
 					error={errors.password?.message}
 				/>
+				<div className={styles.form__error}>{errorMessage}</div>
 			</div>
 			<Button variant=''>{type === 'login' ? 'Sign in' : 'Sign up'}</Button>
 		</form>
