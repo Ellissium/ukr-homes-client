@@ -67,4 +67,34 @@
 		padding: 0px;
 		border-radius: 5px;
 	}
+
+	&.alert {
+		background: $red;
+		border-color: $red;
+	}
+
+	&.editProfile {
+		height: 100%;
+		border-radius: 0;
+		&:hover {
+			border-radius: 5px;
+		}
+		&:active {
+			border-radius: 0px;
+			transform: scale(1);
+		}
+	}
+	&.noEditProfile {
+		height: 100%;
+		border-radius: 0;
+		background: $red;
+		border: $red;
+		&:hover {
+			border-radius: 5px;
+		}
+		&:active {
+			border-radius: 0px;
+			transform: scale(1);
+		}
+	}
 }
