@@ -9,33 +9,47 @@ import { IInput } from './input.interface'
 
 const Input = forwardRef<HTMLInputElement, IInput>(
 	(
-		{ placeholder, error, type = 'text', style, Icon, handleSearch, ...rest },
+		{
+			placeholder,
+			label,
+			className,
+			error,
+			type = 'text',
+			style,
+			Icon,
+			handleSearch,
+			...rest
+		},
 		ref
 	) => {
 		return (
-			<div className={styles.input}>
-				{/* <label className={styles.input__label}>
-					<span className={cn('', className)} style={style}>
-						{Icon && <Icon />}
-						{placeholder}
-					</span>
-				</label> */}
-				<input
-					className={cn(
-						error ? styles.error : '',
-						type === 'search' ? styles.input__search : styles.input__field
-					)}
-					ref={ref}
-					type={type}
-					placeholder={placeholder}
-					{...rest}
-				/>
-				{type === 'search' && (
-					<Button variant='search' onClick={handleSearch}>
-						<BiSearchAlt className={styles.input__searchIcon} />
-					</Button>
+			<div className={cn(styles.input, className)}>
+				{label && (
+					<label className={styles.input__label}>
+						<div className={styles.input__labelText}>
+							{/* {Icon && <Icon />} */}
+							{label}
+						</div>
+					</label>
 				)}
-
+				<div className={styles.input__container}>
+					<input
+						className={cn(
+							error ? styles.error : '',
+							type === 'search' ? styles.input__search : styles.input__field,
+							className
+						)}
+						ref={ref}
+						type={type}
+						placeholder={placeholder}
+						{...rest}
+					/>
+					{type === 'search' && (
+						<Button variant='search' onClick={handleSearch}>
+							<BiSearchAlt className={styles.input__searchIcon} />
+						</Button>
+					)}
+				</div>
 				{error && <div className={styles.input__error}>{error}</div>}
 			</div>
 		)
