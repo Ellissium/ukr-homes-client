@@ -2,9 +2,10 @@ import cn from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC, useEffect, useState } from 'react'
-import { FiLogOut } from 'react-icons/fi'
+import { FiHeart, FiLogOut } from 'react-icons/fi'
 
 import { useActions } from '@/hooks/useActions'
+import { useAuth } from '@/hooks/useAuth'
 import { useProfile } from '@/hooks/useProfile'
 import useScroll from '@/hooks/useScroll'
 
@@ -15,12 +16,12 @@ interface INavbarProps {
 	hideDistance?: number
 }
 const Navbar: FC<INavbarProps> = ({ hideDistance = 1 }) => {
-	const profile = useProfile()
+	const { user } = useAuth()
+	let profile = useProfile()
 	const currentScrollPos = useScroll()
 	const { logout } = useActions()
 	const [prevScrollPos, setPrevScrollPos] = useState(0)
 	const [isVisible, setIsVisible] = useState(true)
-
 	useEffect(() => {
 		setIsVisible(
 			prevScrollPos > currentScrollPos || currentScrollPos < hideDistance
@@ -65,27 +66,43 @@ const Navbar: FC<INavbarProps> = ({ hideDistance = 1 }) => {
 					<Link className={styles.navbar__listLink} href='/posts/rent'>
 						Оренда
 					</Link>
-					<Link className={styles.navbar__listLink} href='/auth'>
-						Авторизуватися
-					</Link>
-					<Link className={styles.navbar__listLink} href='/profile'>
-						<div className={styles.navbar__profileText}>Мій профіль</div>
-						<Image
-							priority={false}
-							src={profile?.avatarPath ? profile.avatarPath : logo}
-							alt='My Image'
-							width={50}
-							height={50}
-							className={styles.navbar__profileImage}
-						/>
-					</Link>
-					<Link
-						className={styles.navbar__logout}
-						onClick={handleClick}
-						href='/'
-					>
-						<FiLogOut className={styles.navbar__logoutIcon} />
-					</Link>
+
+					{user ? (
+						<div className={styles.navbar__auth}>
+							<Link className={styles.navbar__listLink} href='/posts/newPost'>
+								Нове оголошення
+							</Link>
+							<Link className={styles.navbar__listLink} href='/favorites'>
+								<FiHeart className={styles.navbar__favoriteIcon} />
+							</Link>
+							<Link className={styles.navbar__listLink} href='/profile'>
+								<div className={styles.navbar__profileText}>Мій профіль</div>
+								{profile?.avatarPath ? (
+									<Image
+										priority={false}
+										src={profile.avatarPath}
+										alt='My Image'
+										width={50}
+										height={50}
+										className={styles.navbar__profileImage}
+									/>
+								) : (
+									<div>hi</div>
+								)}
+							</Link>
+							<Link
+								className={styles.navbar__logout}
+								onClick={handleClick}
+								href='/'
+							>
+								<FiLogOut className={styles.navbar__logoutIcon} />
+							</Link>{' '}
+						</div>
+					) : (
+						<Link className={styles.navbar__listLink} href='/auth'>
+							Авторизуватися
+						</Link>
+					)}
 				</nav>
 			</div>
 		</div>
