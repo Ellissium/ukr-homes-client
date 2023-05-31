@@ -21,7 +21,7 @@ export const auth = createAsyncThunk<
 		)
 		return response
 	} catch (error) {
-		return thunkApi.rejectWithValue(error)
+		return thunkApi.rejectWithValue(errorCatch(error))
 	}
 })
 
