@@ -4,11 +4,11 @@ import { instance } from '@/api/api_interceptor'
 
 const USERS = '/users'
 
-type TypeData = {
+export type TypeData = {
 	email: string
 	password?: string
 	name?: string
-	avatarPath?: string
+	avatarPath?: string[]
 	phone?: string
 }
 
@@ -22,11 +22,14 @@ export const UserService = {
 		return data
 	},
 
-	async updateProfile(data: TypeData) {
+	async updateProfile(data: any) {
 		return instance<IUser>({
 			url: `${USERS}/profile`,
 			method: 'PUT',
-			data
+			data,
+			headers: {
+				'Content-Type': 'multipart/form-data'
+			}
 		})
 	},
 
